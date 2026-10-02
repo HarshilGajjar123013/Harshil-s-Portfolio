@@ -1,0 +1,455 @@
+.hero-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #111111;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  /* Background Giant Typography Header */
+  .giant-title-wrapper {
+    position: absolute;
+    top: clamp(2rem, 23vh, 25.7rem);
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 clamp(1rem, 3vw, 2.5rem);
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+
+    .giant-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1.5rem, 3.5vw, 4rem);
+      margin: 0;
+      padding: 0;
+      font-size: clamp(7rem, 10.3vw, 10.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      text-transform: uppercase;
+      font-family: var(--font-geist-sans), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      max-width: 100%;
+
+      .outline-text {
+        color: #ffffff;
+        -webkit-text-stroke: clamp(2px, 2.22vw, 10px) #18181b;
+        paint-order: stroke fill;
+        font-weight: 900;
+      }
+
+      .solid-text {
+        color: #18181b;
+        font-weight: 900;
+      }
+    }
+  }
+
+  /* Center Portrait Image with Clean Bottom Fade */
+  .portrait-container {
+    position: absolute;
+    bottom: clamp(0.75rem, 3vh, 2.5rem);
+    left: 54%;
+    transform: translateX(-50%);
+    height: clamp(380px, 100vh, 530px);
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none;
+
+    .portrait-frame {
+      position: relative;
+      height: 100%;
+      width: auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      will-change: transform;
+
+      .portrait-img {
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+        object-position: bottom center;
+        filter: contrast(1.02);
+        user-select: none;
+        position: relative;
+        z-index: 2;
+        -webkit-mask-image: linear-gradient(to bottom,
+            #000000 0%,
+            #000000 82%,
+            rgba(0, 0, 0, 0.95) 87%,
+            rgba(0, 0, 0, 0.6) 93%,
+            rgba(0, 0, 0, 0.2) 97%,
+            transparent 100%);
+        mask-image: linear-gradient(to bottom,
+            #000000 0%,
+            #000000 82%,
+            rgba(0, 0, 0, 0.95) 87%,
+            rgba(0, 0, 0, 0.6) 93%,
+            rgba(0, 0, 0, 0.2) 97%,
+            transparent 100%);
+      }
+    }
+  }
+
+  /* Left Content: Title, Description, and CTA Button */
+  .hero-left-content {
+    position: absolute;
+    left: clamp(2rem, 6vw, 6.5rem);
+    bottom: clamp(2.5rem, 8vh, 5.5rem);
+    max-width: clamp(300px, 24vw, 360px);
+    z-index: 3;
+    will-change: transform, opacity;
+
+    .role-title {
+      font-size: clamp(1.35rem, 2vw, 1.85rem);
+      font-weight: 700;
+      color: #18181b;
+      margin: 0 0 0.65rem 0;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .role-description {
+      font-size: clamp(0.875rem, 1vw, 0.975rem);
+      color: #64748b;
+      line-height: 1.55;
+      margin: 0 0 1.4rem 0;
+      font-weight: 400;
+    }
+
+    .collaborate-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #111111;
+      color: #ffffff;
+      padding: 0.8rem 1.6rem;
+      border-radius: 9999px;
+      font-size: 0.925rem;
+      font-weight: 500;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+      .arrow-icon {
+        font-size: 1.15rem;
+        transition: transform 0.25s ease;
+      }
+
+      &:hover {
+        background-color: #000000;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+
+        .arrow-icon {
+          transform: translate(2px, -2px);
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  /* Right Content: Social Media Links */
+  .hero-right-content {
+    position: absolute;
+    right: clamp(2rem, 6vw, 6.5rem);
+    bottom: clamp(2.5rem, 8vh, 5.5rem);
+    z-index: 3;
+    will-change: transform;
+
+    .social-pill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-end;
+
+      .social-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 142px;
+        padding: 0.65rem 1.3rem;
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 9999px;
+        color: #334155;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.22s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+
+        .social-icon {
+          font-size: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: inherit;
+        }
+
+        .social-label {
+          color: inherit;
+        }
+
+        &:hover {
+          border-color: #111111;
+          color: #111111;
+          transform: translateX(-4px);
+          background-color: #fafafa;
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+        }
+      }
+    }
+  }
+
+  /* Tablet and Mobile Responsiveness */
+  @media (max-width: 1024px) {
+    .giant-title-wrapper {
+      top: clamp(2rem, 18vh, 12rem);
+
+      .giant-title {
+        font-size: clamp(3.75rem, 7.8vw, 6.8rem);
+        gap: clamp(1rem, 2.5vw, 2.5rem);
+      }
+    }
+
+    .portrait-container {
+      height: clamp(420px, 60vh, 580px);
+    }
+
+    .hero-left-content {
+      left: clamp(1.5rem, 4vw, 3rem);
+      bottom: 2rem;
+      max-width: 270px;
+    }
+
+    .hero-right-content {
+      right: clamp(1.5rem, 4vw, 3rem);
+      bottom: 2rem;
+    }
+  }
+
+  /* Mobile Layout (<= 768px) */
+  @media (max-width: 768px) {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-y: visible;
+    justify-content: flex-start;
+    padding: clamp(5.25rem, 12vh, 6.75rem) clamp(1rem, 4vw, 1.5rem) 3rem;
+
+    .giant-title-wrapper {
+      position: relative;
+      top: 0;
+      margin-bottom: 1.25rem;
+      padding: 0;
+
+      .giant-title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        gap: clamp(0.4rem, 2.2vw, 0.95rem);
+        font-size: clamp(1.95rem, 8.8vw, 3.6rem);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        max-width: 100%;
+
+        .outline-text {
+          -webkit-text-stroke: clamp(1.5px, 0.45vw, 2.4px) #18181b;
+        }
+
+        .solid-text {
+          color: #18181b;
+          font-weight: 900;
+        }
+      }
+    }
+
+    .portrait-container {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      transform: none;
+      height: clamp(280px, 42vh, 380px);
+      max-height: 400px;
+      margin-bottom: 1.5rem;
+      width: 100%;
+
+      .portrait-frame {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+      }
+
+      .portrait-img {
+        max-width: 90vw;
+        height: 100%;
+        object-fit: contain;
+        object-position: bottom center;
+      }
+    }
+
+    .hero-left-content {
+      position: relative;
+      left: auto;
+      bottom: auto;
+      max-width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 2rem;
+
+      .role-title {
+        font-size: clamp(1.2rem, 5vw, 1.5rem);
+      }
+
+      .role-description {
+        font-size: clamp(0.85rem, 3.8vw, 0.95rem);
+        max-width: 480px;
+      }
+
+      .collaborate-btn {
+        min-height: 44px;
+        padding: 0.8rem 1.6rem;
+      }
+    }
+
+    .hero-right-content {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      width: 100%;
+
+      .social-pill-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.6rem;
+
+        .social-pill {
+          width: auto;
+          min-width: 115px;
+          min-height: 44px;
+          justify-content: center;
+
+          &:hover {
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+  }
+
+  /* Small Mobile (320px - 374px) */
+  @media (max-width: 374px) {
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+
+    .giant-title-wrapper {
+      .giant-title {
+        font-size: clamp(1.65rem, 8vw, 2.2rem);
+        gap: 0.35rem;
+        flex-direction: row;
+        white-space: nowrap;
+
+        .outline-text {
+          -webkit-text-stroke: 1.5px #18181b;
+        }
+      }
+    }
+
+    .portrait-container {
+      height: 250px;
+    }
+
+    .hero-left-content {
+      .role-title {
+        font-size: 1.15rem;
+      }
+
+      .role-description {
+        font-size: 0.825rem;
+      }
+
+      .collaborate-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .hero-right-content {
+      .social-pill-list {
+        gap: 0.45rem;
+
+        .social-pill {
+          min-width: 95px;
+          padding: 0.5rem 0.75rem;
+          font-size: 0.775rem;
+
+          .social-label {
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
+  }
+
+  /* Landscape Orientation on Mobile & Small Tablets */
+  @media (max-height: 600px) and (orientation: landscape) {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-y: visible;
+    padding-top: 5rem;
+    padding-bottom: 2.5rem;
+
+    .giant-title-wrapper {
+      position: relative;
+      top: 0;
+
+      .giant-title {
+        font-size: clamp(2rem, 6vw, 3.25rem);
+      }
+    }
+
+    .portrait-container {
+      position: relative;
+      height: 45vh;
+      max-height: 240px;
+    }
+  }
+
+  /* Ultra-wide Screen Constraint (1920px+) */
+  @media (min-width: 1920px) {
+    .giant-title-wrapper {
+      max-width: 1800px;
+      margin: 0 auto;
+
+      .giant-title {
+        font-size: clamp(7.5rem, 10vw, 11rem);
+      }
+    }
+  }
+}

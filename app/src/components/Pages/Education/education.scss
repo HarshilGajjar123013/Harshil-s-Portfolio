@@ -1,0 +1,624 @@
+.education-section {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #18181b;
+  padding: clamp(4.5rem, 8vh, 7.5rem) clamp(1.5rem, 6vw, 6rem) clamp(6rem, 10vh, 9rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  font-family: var(--font-geist-sans), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  .education-container {
+    max-width: clamp(880px, 82vw, 1140px);
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ----------------------------------------------------
+     Section Header
+  ----------------------------------------------------- */
+  .education-header {
+    text-align: center;
+    margin-bottom: clamp(3rem, 5vh, 4.5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .badge-wrapper {
+      margin-bottom: 0.85rem;
+
+      .education-badge {
+        display: inline-block;
+        padding: 0.4rem 1.05rem;
+        border-radius: 9999px;
+        background-color: #f4f4f5;
+        color: #52525b;
+        font-size: 0.785rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        border: 1px solid #e4e4e7;
+        transition: all 0.25s ease;
+
+        &:hover {
+          background-color: #18181b;
+          color: #ffffff;
+          border-color: #18181b;
+        }
+      }
+    }
+
+    .education-title {
+      font-size: clamp(2.2rem, 4vw, 3.25rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      color: #18181b;
+      margin: 0 0 1rem 0;
+      line-height: 1.15;
+    }
+
+    .education-subtitle {
+      max-width: 680px;
+      font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+      line-height: 1.6;
+      color: #71717a;
+      margin: 0;
+      font-weight: 400;
+    }
+  }
+
+  /* ----------------------------------------------------
+     Highlights & Quick Metrics Bar
+  ----------------------------------------------------- */
+  .education-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: clamp(3.5rem, 6vh, 5rem);
+    width: 100%;
+
+    .edu-stat-card {
+      background: #fafafa;
+      border: 1px solid #f0f0f2;
+      border-radius: 20px;
+      padding: 1.5rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(
+          circle at 50% 0%,
+          rgba(24, 24, 27, 0.03) 0%,
+          transparent 75%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .stat-icon-bubble {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background-color: #ffffff;
+        border: 1px solid #e4e4e7;
+        color: #18181b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        margin-bottom: 0.9rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+        transition: all 0.25s ease;
+      }
+
+      .stat-value {
+        font-size: clamp(1.65rem, 2.2vw, 2.2rem);
+        font-weight: 800;
+        color: #18181b;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        margin-bottom: 0.4rem;
+      }
+
+      .stat-label {
+        font-size: 0.825rem;
+        font-weight: 500;
+        color: #71717a;
+        line-height: 1.35;
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+        background-color: #ffffff;
+        border-color: #d4d4d8;
+        box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.08);
+
+        &::before {
+          opacity: 1;
+        }
+
+        .stat-icon-bubble {
+          background-color: #18181b;
+          color: #ffffff;
+          border-color: #18181b;
+          transform: scale(1.08) rotate(-4deg);
+        }
+      }
+    }
+  }
+
+  /* ----------------------------------------------------
+     Timeline Architecture
+  ----------------------------------------------------- */
+  .education-timeline {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-left: 2.75rem;
+
+    /* Continuous spine guide line */
+    .timeline-spine {
+      position: absolute;
+      top: 1.5rem;
+      bottom: 2rem;
+      left: 15px;
+      width: 2px;
+      background: linear-gradient(
+        180deg,
+        #18181b 0%,
+        rgba(24, 24, 27, 0.25) 50%,
+        rgba(24, 24, 27, 0.06) 100%
+      );
+      border-radius: 2px;
+    }
+
+    .edu-timeline-row {
+      position: relative;
+      width: 100%;
+
+      /* Glowing timeline checkpoint node */
+      .timeline-node {
+        position: absolute;
+        top: 2rem;
+        left: -2.75rem;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+
+        .node-dot {
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background-color: #ffffff;
+          border: 3.5px solid #18181b;
+          box-shadow: 0 0 0 4px rgba(24, 24, 27, 0.08);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .node-pulse {
+          position: absolute;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background-color: rgba(24, 24, 27, 0.12);
+          opacity: 0;
+          transform: scale(0.6);
+          transition: all 0.3s ease;
+        }
+      }
+
+      &:hover {
+        .timeline-node {
+          .node-dot {
+            background-color: #18181b;
+            box-shadow: 0 0 0 6px rgba(24, 24, 27, 0.15);
+            transform: scale(1.15);
+          }
+
+          .node-pulse {
+            opacity: 1;
+            transform: scale(1.4);
+            animation: nodePulseAnim 1.6s infinite ease-out;
+          }
+        }
+      }
+    }
+
+    /* Individual Timeline Card */
+    .edu-timeline-card {
+      background-color: #ffffff;
+      border: 1px solid #e4e4e7;
+      border-radius: 24px;
+      padding: clamp(1.75rem, 3.5vw, 2.75rem);
+      box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.04);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+
+      /* Subtle top hairline highlight */
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #18181b, transparent);
+        opacity: 0.15;
+        transition: opacity 0.3s ease;
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+        border-color: #d4d4d8;
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      /* Card Top Bar */
+      .card-top-bar {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+
+        .degree-meta {
+          flex: 1;
+          min-width: 280px;
+
+          .icon-badge-row {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+
+            .card-glyph {
+              width: 34px;
+              height: 34px;
+              border-radius: 10px;
+              background-color: #18181b;
+              color: #ffffff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.1rem;
+              flex-shrink: 0;
+            }
+
+            .status-pill {
+              font-size: 0.725rem;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 0.05em;
+              background-color: #f4f4f5;
+              color: #3f3f46;
+              padding: 0.3rem 0.75rem;
+              border-radius: 9999px;
+              border: 1px solid #e4e4e7;
+            }
+
+            .grade-pill {
+              font-size: 0.725rem;
+              font-weight: 600;
+              background-color: rgba(24, 24, 27, 0.04);
+              color: #18181b;
+              padding: 0.3rem 0.75rem;
+              border-radius: 9999px;
+              border: 1px solid rgba(24, 24, 27, 0.1);
+            }
+          }
+
+          .degree-name {
+            font-size: clamp(1.3rem, 1.8vw, 1.65rem);
+            font-weight: 700;
+            color: #18181b;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            margin: 0;
+          }
+        }
+
+        .period-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          padding: 0.45rem 0.95rem;
+          background-color: #fafafa;
+          border: 1px solid #e4e4e7;
+          border-radius: 9999px;
+          font-size: 0.825rem;
+          font-weight: 600;
+          color: #18181b;
+          white-space: nowrap;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+
+          .badge-icon {
+            font-size: 0.95rem;
+            color: #71717a;
+          }
+        }
+      }
+
+      /* Institution and Location */
+      .institution-row {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.925rem;
+        color: #52525b;
+        font-weight: 500;
+        margin-bottom: 1.2rem;
+        flex-wrap: wrap;
+
+        .institution-name {
+          color: #18181b;
+          font-weight: 600;
+        }
+
+        .separator {
+          color: #d4d4d8;
+        }
+
+        .location-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          color: #71717a;
+
+          .pin-icon {
+            font-size: 0.9rem;
+          }
+        }
+      }
+
+      .degree-description {
+        font-size: clamp(0.92rem, 1vw, 1rem);
+        line-height: 1.65;
+        color: #52525b;
+        margin: 0 0 1.65rem 0;
+        font-weight: 400;
+      }
+
+      /* Skills & Subject Pills */
+      .skills-block {
+        margin-bottom: 1.65rem;
+
+        .block-title {
+          font-size: 0.775rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #a1a1aa;
+          margin: 0 0 0.75rem 0;
+        }
+
+        .subject-pills {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+
+          .subject-tag {
+            font-size: 0.825rem;
+            font-weight: 500;
+            padding: 0.35rem 0.8rem;
+            border-radius: 8px;
+            background-color: #f4f4f5;
+            color: #3f3f46;
+            border: 1px solid #e4e4e7;
+            transition: all 0.2s ease;
+
+            &:hover {
+              background-color: #18181b;
+              color: #ffffff;
+              border-color: #18181b;
+              transform: translateY(-2px);
+            }
+          }
+        }
+      }
+
+      /* Achievements List */
+      .achievements-block {
+        background-color: #fafafa;
+        border: 1px solid #f0f0f2;
+        border-radius: 16px;
+        padding: 1.25rem 1.4rem;
+
+        .block-title {
+          font-size: 0.775rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #71717a;
+          margin: 0 0 0.85rem 0;
+        }
+
+        .achievements-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.65rem;
+
+          .achievement-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            font-size: 0.895rem;
+            line-height: 1.5;
+            color: #3f3f46;
+
+            .check-icon {
+              font-size: 1.05rem;
+              color: #18181b;
+              flex-shrink: 0;
+              margin-top: 0.15rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* ----------------------------------------------------
+     Responsiveness (Tablets & Mobile)
+  ----------------------------------------------------- */
+  @media (max-width: 900px) {
+    .education-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .education-timeline {
+      padding-left: 2.25rem;
+
+      .timeline-spine {
+        left: 11px;
+      }
+
+      .edu-timeline-row {
+        .timeline-node {
+          left: -2.25rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 640px) {
+    padding: clamp(3.5rem, 6vh, 4.5rem) 1.25rem clamp(4.5rem, 8vh, 6rem);
+
+    .education-header {
+      margin-bottom: 2.25rem;
+
+      .education-title {
+        font-size: clamp(1.85rem, 6.5vw, 2.35rem);
+      }
+    }
+
+    .education-stats-grid {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .education-timeline {
+      padding-left: 0;
+      gap: 1.75rem;
+
+      .timeline-spine {
+        display: none;
+      }
+
+      .edu-timeline-row {
+        .timeline-node {
+          display: none;
+        }
+
+        .edu-timeline-card {
+          padding: 1.4rem 1.15rem;
+          border-radius: 18px;
+
+          .card-top-bar {
+            flex-direction: column;
+            gap: 0.75rem;
+
+            .period-badge {
+              align-self: flex-start;
+            }
+          }
+
+          .institution-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.35rem;
+
+            .separator {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* Small Mobile (320px - 374px) */
+  @media (max-width: 374px) {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+
+    .education-header {
+      .education-title {
+        font-size: 1.75rem;
+      }
+    }
+
+    .education-timeline {
+      .edu-timeline-row {
+        .edu-timeline-card {
+          padding: 1.15rem 0.85rem;
+
+          .degree-title {
+            font-size: 1.15rem;
+          }
+
+          .subjects-tags-cloud {
+            gap: 0.35rem;
+
+            .subject-pill {
+              font-size: 0.725rem;
+              padding: 0.3rem 0.6rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* Ultra-wide Screen Containment (1920px+) */
+  @media (min-width: 1920px) {
+    .education-container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+  }
+}
+
+@keyframes nodePulseAnim {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

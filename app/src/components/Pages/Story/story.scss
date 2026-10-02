@@ -1,0 +1,324 @@
+.story-section {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #18181b;
+  padding: clamp(3.5rem, 6vh, 5.5rem) clamp(1.5rem, 6vw, 6rem) clamp(5rem, 9vh, 8rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  font-family: var(--font-geist-sans), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Spacious, Wide Container */
+  .story-container {
+    max-width: clamp(860px, 80vw, 1080px);
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Section Title */
+  .story-header {
+    text-align: center;
+    margin-bottom: 2.75rem;
+
+    .story-badge {
+      display: inline-block;
+      padding: 0.35rem 0.95rem;
+      border-radius: 9999px;
+      background-color: #f4f4f5;
+      color: #52525b;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.85rem;
+    }
+
+    .story-title {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #18181b;
+      margin: 0;
+      line-height: 1.15;
+    }
+  }
+
+  /* 1st Paragraph (Before Images) */
+  .story-intro {
+    margin-bottom: 1.5rem;
+  }
+
+  /* Editorial Paragraphs Styling */
+  .editorial-text {
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    line-height: 1.8;
+    letter-spacing: -0.01em;
+    color: #52525b;
+    margin: 0 0 1.5rem 0;
+
+    strong {
+      color: #18181b;
+      font-weight: 700;
+    }
+
+    &.secondary {
+      color: #71717a;
+      font-size: clamp(1rem, 1.3vw, 1.15rem);
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+  }
+
+  /* Pinned Polaroids Showcase (Between 1st & 2nd/3rd Paragraphs) */
+  .polaroid-showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3.5rem 0 4.25rem;
+    position: relative;
+    width: 100%;
+
+    .polaroid-card {
+      background: #ffffff;
+      padding: 14px 14px 42px 14px;
+      border-radius: 4px;
+      position: relative;
+      width: clamp(230px, 24vw, 310px);
+      user-select: none;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+
+      .polaroid-inner {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 2px;
+        background-color: #f4f4f5;
+
+        .polaroid-photo {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.4s ease;
+
+          &.photo-one,
+          &.photo-two {
+            filter: none;
+          }
+        }
+      }
+
+      /* 3D Realistic Pushpin */
+      .pushpin {
+        position: absolute;
+        top: -9px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 20px;
+        z-index: 6;
+        pointer-events: none;
+
+        .pin-head {
+          display: block;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: radial-gradient(circle at 35% 35%, #4b5563, #1f2937 60%, #111827 100%);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+        }
+
+        .pin-shadow {
+          position: absolute;
+          bottom: -3px;
+          left: 3px;
+          width: 14px;
+          height: 5px;
+          border-radius: 50%;
+          background: rgba(0, 0, 0, 0.25);
+          filter: blur(2px);
+        }
+      }
+
+      &:hover {
+        .polaroid-photo {
+          transform: scale(1.05);
+        }
+      }
+    }
+
+    /* Left Polaroid: Tilted Counter-Clockwise */
+    .polaroid-left {
+      transform: rotate(-7deg);
+      box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+      z-index: 1;
+
+      &:hover {
+        transform: rotate(-2deg) scale(1.05);
+        z-index: 10;
+        box-shadow: 0 28px 56px -12px rgba(0, 0, 0, 0.28);
+      }
+    }
+
+    /* Right Polaroid: Tilted Clockwise & Overlapping */
+    .polaroid-right {
+      transform: rotate(6deg);
+      margin-left: -40px;
+      box-shadow: 0 22px 46px -12px rgba(0, 0, 0, 0.24), 0 2px 6px rgba(0, 0, 0, 0.08);
+      z-index: 2;
+
+      &:hover {
+        transform: rotate(2deg) scale(1.05);
+        z-index: 10;
+        box-shadow: 0 28px 56px -12px rgba(0, 0, 0, 0.28);
+      }
+    }
+  }
+
+  /* 2 Paragraphs (After Images) */
+  .story-body {
+    margin-bottom: 2.5rem;
+  }
+
+  /* View Resume CTA Button */
+  .story-cta-wrapper {
+    display: flex;
+    justify-content: flex-start;
+
+    .resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background-color: #18181b;
+      color: #ffffff;
+      padding: 0.85rem 1.75rem;
+      border-radius: 9999px;
+      font-size: 0.925rem;
+      font-weight: 500;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+      .btn-icon {
+        font-size: 1.05rem;
+      }
+
+      .arrow-icon {
+        font-size: 1.1rem;
+        transition: transform 0.25s ease;
+      }
+
+      &:hover {
+        background-color: #000000;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+
+        .arrow-icon {
+          transform: translate(2px, -2px);
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1024px) {
+    .polaroid-showcase {
+      .polaroid-card {
+        width: clamp(190px, 24vw, 260px);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: clamp(3.5rem, 6vh, 4.5rem) 1.25rem clamp(4.5rem, 8vh, 6rem);
+
+    .story-header {
+      margin-bottom: 2rem;
+
+      .story-title {
+        font-size: clamp(2rem, 6vw, 2.5rem);
+      }
+    }
+
+    .polaroid-showcase {
+      margin: 2.25rem 0 2.75rem;
+
+      .polaroid-card {
+        width: clamp(150px, 42vw, 210px);
+        padding: 10px 10px 30px 10px;
+      }
+
+      .polaroid-right {
+        margin-left: -20px;
+      }
+    }
+
+    .story-cta-wrapper {
+      justify-content: center;
+
+      .resume-btn {
+        min-height: 44px;
+      }
+    }
+  }
+
+  /* Small Mobile (320px - 374px) */
+  @media (max-width: 374px) {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+
+    .story-header {
+      .story-title {
+        font-size: 1.85rem;
+      }
+    }
+
+    .editorial-text {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      overflow-wrap: break-word;
+    }
+
+    .polaroid-showcase {
+      margin: 1.75rem 0 2.25rem;
+
+      .polaroid-card {
+        width: clamp(130px, 40vw, 155px);
+        padding: 8px 8px 24px 8px;
+      }
+
+      .polaroid-left {
+        transform: rotate(-4deg);
+      }
+
+      .polaroid-right {
+        transform: rotate(4deg);
+        margin-left: -15px;
+      }
+    }
+
+    .story-cta-wrapper {
+      .resume-btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+    }
+  }
+
+  /* Ultra-wide Screen Containment (1920px+) */
+  @media (min-width: 1920px) {
+    .story-container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+  }
+}
