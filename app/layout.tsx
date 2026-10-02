@@ -16,6 +16,15 @@ export const metadata: Metadata = {
   title: "Harshil Gajjar | Full Stack Developer & AI Engineer",
   description:
     "Portfolio of Harshil Gajjar — Full Stack Architect, AI Agent Workflows, and Automation Systems Engineer.",
+  icons: {
+    icon: [
+      { url: "/assert/img/story.png" },
+      { url: "/icon.png" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/assert/img/story.png",
+    apple: "/assert/img/story.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
