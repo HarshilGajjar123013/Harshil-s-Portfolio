@@ -17,11 +17,7 @@ export const metadata: Metadata = {
   description:
     "Portfolio of Harshil Gajjar — Full Stack Architect, AI Agent Workflows, and Automation Systems Engineer.",
   icons: {
-    icon: [
-      { url: "/assert/img/story.png" },
-      { url: "/icon.png" },
-      { url: "/favicon.ico" },
-    ],
+    icon: "/assert/img/story.png",
     shortcut: "/assert/img/story.png",
     apple: "/assert/img/story.png",
   },
