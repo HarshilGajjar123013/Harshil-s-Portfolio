@@ -62,6 +62,19 @@ export default function Story() {
     };
   }, []);
 
+  const handleResumeClick = () => {
+    try {
+      const downloadLink = document.createElement("a");
+      downloadLink.href = "/assert/doc/resume.pdf";
+      downloadLink.download = "Harshil_Gajjar_Resume.pdf";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    } catch (err) {
+      console.error("Resume download error:", err);
+    }
+  };
+
   return (
     <section className="story-section" id="story" ref={storyRef}>
       <div className="story-container">
@@ -156,10 +169,12 @@ export default function Story() {
         {/* View Resume CTA */}
         <div className="story-cta-wrapper" ref={ctaRef}>
           <a
-            href="/resume.pdf"
+            href="/assert/doc/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="resume-btn"
+            onClick={handleResumeClick}
+            title="Open and download resume"
           >
             <FiFileText className="btn-icon" />
             <span>View My Resume</span>
