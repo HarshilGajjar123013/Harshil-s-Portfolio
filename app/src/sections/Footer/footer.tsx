@@ -57,12 +57,6 @@ const socialLinks = [
     href: "https://instagram.com",
     handle: "instagram.com/harshil.gajjar",
   },
-  {
-    name: "Behance",
-    icon: <FaBehance />,
-    href: "https://behance.net",
-    handle: "behance.net/harshilgajjar",
-  },
 ];
 
 export default function Footer() {
@@ -70,7 +64,7 @@ export default function Footer() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [istTime, setIstTime] = useState("");
 
-  const emailAddress = "harshilgajjar.dev@gmail.com";
+  const emailAddress = "harshilgajjar06@gmail.com";
 
   // Live IST Clock (Gujarat, India)
   useEffect(() => {

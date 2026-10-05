@@ -57,8 +57,8 @@
   /* Center Portrait Image with Clean Bottom Fade */
   .portrait-container {
     position: absolute;
-    bottom: clamp(0.75rem, 3vh, 2.5rem);
-    left: 54%;
+    bottom: clamp(0.65rem, 2vh, 2.3rem);
+    left: 49%;
     transform: translateX(-50%);
     height: clamp(380px, 100vh, 530px);
     z-index: 2;

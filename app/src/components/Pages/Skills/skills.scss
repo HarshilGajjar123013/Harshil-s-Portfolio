@@ -199,6 +199,24 @@
     gap: 2rem;
     margin-bottom: clamp(4rem, 7vh, 6rem);
     width: 100%;
+    align-items: start;
+
+    .skills-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+    }
+
+    &.single-view {
+      display: flex;
+      justify-content: center;
+
+      .domain-card {
+        max-width: 620px;
+        width: 100%;
+      }
+    }
 
     .domain-card {
       background-color: #ffffff;
@@ -209,6 +227,8 @@
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
+      width: 100%;
+      height: fit-content;
 
       /* Top accent line */
       &::before {

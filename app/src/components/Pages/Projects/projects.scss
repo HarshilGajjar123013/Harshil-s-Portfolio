@@ -276,41 +276,7 @@
         font-weight: 400;
       }
 
-      /* Impact Metrics Banner */
-      .metrics-banner {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.75rem;
-        background-color: #fafafa;
-        border: 1px solid #f0f0f2;
-        border-radius: 14px;
-        padding: 0.85rem 1rem;
-        margin-bottom: 1.5rem;
 
-        .metric-cell {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-
-          .metric-val {
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: #18181b;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-          }
-
-          .metric-lbl {
-            font-size: 0.715rem;
-            font-weight: 500;
-            color: #71717a;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-top: 0.15rem;
-          }
-        }
-      }
 
       /* Visual Interface Mockup Window */
       .card-preview-window {
@@ -677,11 +643,7 @@
           padding: 1.4rem 1.15rem;
         }
 
-        .metrics-banner {
-          grid-template-columns: 1fr;
-          gap: 0.5rem;
-          padding: 0.75rem;
-        }
+
 
         .card-actions {
           flex-wrap: wrap;

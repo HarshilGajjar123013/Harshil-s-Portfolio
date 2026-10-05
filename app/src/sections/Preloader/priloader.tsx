@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -19,7 +20,7 @@ export default function Preloader() {
   const [percent, setPercent] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [shouldRemove, setShouldRemove] = useState(false);
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const [isPlayingAudio, setIsPlayingAudio] = useState(true);
   const [hasInteracted, setHasInteracted] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -543,47 +544,55 @@ export default function Preloader() {
   const startAudio = () => {
     if (!audioRef.current) return;
     audioRef.current.volume = 0.55;
-    audioRef.current
-      .play()
-      .then(() => {
-        setIsPlayingAudio(true);
-        setHasInteracted(true);
-      })
-      .catch(() => {
-        setIsPlayingAudio(false);
-      });
+    const playPromise = audioRef.current.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setIsPlayingAudio(true);
+          setHasInteracted(true);
+        })
+        .catch(() => {
+          // If browser blocks immediate playback prior to interaction,
+          // keep isPlayingAudio true so the UI reflects song active intent,
+          // and audio begins on the user's first gesture.
+        });
+    }
   };
 
   const toggleAudio = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!audioRef.current) return;
 
-    if (isPlayingAudio) {
+    if (isPlayingAudio && !audioRef.current.paused) {
       audioRef.current.pause();
       setIsPlayingAudio(false);
     } else {
+      setIsPlayingAudio(true);
       startAudio();
     }
   };
 
-  // Attempt initial autoplay + listen for first document interaction
+  // Attempt initial autoplay + listen for any user interaction to unlock sound
   useEffect(() => {
     startAudio();
 
-    const handleFirstUserInteraction = () => {
-      if (!hasInteracted && audioRef.current && audioRef.current.paused) {
+    const handleUserInteraction = () => {
+      if (audioRef.current && audioRef.current.paused) {
         startAudio();
       }
     };
 
-    window.addEventListener("pointerdown", handleFirstUserInteraction, { once: true });
-    window.addEventListener("keydown", handleFirstUserInteraction, { once: true });
+    const userEvents = ["pointerdown", "touchstart", "click", "keydown", "wheel", "scroll"];
+    userEvents.forEach((evt) =>
+      window.addEventListener(evt, handleUserInteraction, { passive: true })
+    );
 
     return () => {
-      window.removeEventListener("pointerdown", handleFirstUserInteraction);
-      window.removeEventListener("keydown", handleFirstUserInteraction);
+      userEvents.forEach((evt) =>
+        window.removeEventListener(evt, handleUserInteraction)
+      );
     };
-  }, [hasInteracted]);
+  }, []);
 
   // Audio smooth fade-out on completion
   useEffect(() => {
@@ -670,6 +679,8 @@ export default function Preloader() {
       className={`preloader-overlay ${isCompleted ? "is-exiting" : ""}`}
       ref={containerRef}
       onClick={startAudio}
+      onPointerDown={startAudio}
+      onTouchStart={startAudio}
       aria-hidden="true"
     >
       {/* Background Audio Song Track */}
@@ -677,6 +688,8 @@ export default function Preloader() {
         ref={audioRef}
         src="/audio/preloader.wav"
         preload="auto"
+        autoPlay
+        playsInline
         loop
       />
 

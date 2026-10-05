@@ -39,11 +39,11 @@ interface Project {
 const projectsData: Project[] = [
   {
     id: "salahakar",
-    title: "Salahakar Pro",
+    title: "Salahakar AI",
     subtitle: "Enterprise AI Legal Intelligence & Multilingual Document Platform",
     category: "ai",
     categoryLabel: "AI & Legal Tech",
-    year: "2024",
+    year: "2025-2026",
     role: "Lead Full Stack & AI Architect",
     description:
       "Engineered a high-performance legal advisory web ecosystem powered by AI embeddings and semantic search. Features real-time legal judgment retrieval, multilingual legal act mapping, an automated contract editor, and an intelligent legal advisory bot.",
@@ -53,16 +53,15 @@ const projectsData: Project[] = [
       { label: "Workflow Efficiency", value: "85% Boost" },
     ],
     tags: [
-      "Next.js",
-      "TypeScript",
-      "LangChain",
-      "OpenAI API",
-      "Node.js",
-      "PostgreSQL",
+      "React.JS",
       "SCSS",
+      "Python",
+      "AI",
+      "PostrageSQL",
+      "API"
     ],
-    liveUrl: "https://salahakar.pro",
-    githubUrl: "https://github.com",
+    liveUrl: "https://salhakar.com/",
+    // githubUrl: "https://github.com",
     accentColor: "#18181b",
     previewGradient: "linear-gradient(135deg, #18181b 0%, #27272a 100%)",
     featured: true,
@@ -70,13 +69,13 @@ const projectsData: Project[] = [
   {
     id: "designs-of-dreams",
     title: "Designs of Dreams (DoD)",
-    subtitle: "High-End Luxury Jewelry Atelier & E-Commerce Operating System",
+    subtitle: "High-End Luxury The Heritage Collections to create dignified, sustainable livelihoods for local Indian artisans, especially rural women, while bringing the timeless grace of handcrafted sarees, dupattas, and bespoke embroidery to modern celebrations.",
     category: "fullstack",
     categoryLabel: "Full Stack E-Commerce",
-    year: "2024",
+    year: "2026",
     role: "Full Stack Engineer",
     description:
-      "Crafted an ultra-luxurious digital boutique and bespoke Atelier Admin Panel. Includes bespoke jewelry customization previews, real-time inventory management, secure Stripe payment checkouts, and automated customer lifecycle marketing pipelines.",
+      "Crafted an ultra-luxurious digital boutique and bespoke Atelier Admin Panel. Includes bespoke  customization previews, real-time inventory management, secure Stripe payment checkouts, and automated customer lifecycle marketing pipelines.",
     impactMetrics: [
       { label: "Conversion Rate", value: "4.8%" },
       { label: "Performance Score", value: "98/100" },
@@ -86,49 +85,20 @@ const projectsData: Project[] = [
       "Next.js 15",
       "React",
       "TypeScript",
-      "Stripe Checkout",
+      "Checkout",
       "REST APIs",
-      "SCSS Modules",
+      "SCSS",
       "Cloudinary",
     ],
-    liveUrl: "https://designsofdreams.com",
-    githubUrl: "https://github.com",
+    liveUrl: "https://dodshop.vercel.app/",
+    // githubUrl: "https://github.com",
     accentColor: "#0f172a",
     previewGradient: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)",
     featured: true,
   },
   {
-    id: "ai-automation-pipeline",
-    title: "Autonomous Agent & Workflow Pipelines",
-    subtitle: "Enterprise Business Process Automation Engine via n8n & LLMs",
-    category: "ai",
-    categoryLabel: "AI & Workflow Automation",
-    year: "2024",
-    role: "AI & Automation Engineer",
-    description:
-      "Architected multi-agent orchestration pipelines that bridge enterprise CRMs, communication channels, and generative AI models. Automates customer lead scoring, dynamic email responses, data extraction, and cross-platform notification dispatch.",
-    impactMetrics: [
-      { label: "Manual Hours Saved", value: "120+ hrs/mo" },
-      { label: "Execution Success", value: "99.9%" },
-      { label: "End-to-End Latency", value: "Sub-second" },
-    ],
-    tags: [
-      "n8n Core",
-      "Python",
-      "LangChain",
-      "Webhooks",
-      "OpenAI",
-      "Slack / CRM APIs",
-      "Docker",
-    ],
-    githubUrl: "https://github.com",
-    accentColor: "#27272a",
-    previewGradient: "linear-gradient(135deg, #27272a 0%, #3f3f46 100%)",
-    featured: true,
-  },
-  {
-    id: "hireonix-ats",
-    title: "Hireonix — Smart ATS & Career Intelligence",
+    id: "careersensora",
+    title: "Careersensora — Smart ATS & Career Intelligence",
     subtitle: "AI-Powered Applicant Tracking System & Resume Scoring Engine",
     category: "enterprise",
     categoryLabel: "Enterprise SaaS",
@@ -142,45 +112,16 @@ const projectsData: Project[] = [
       { label: "Realtime Analytics", value: "Interactive" },
     ],
     tags: [
+     "Next.js 15",
       "React",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "TailwindCSS",
-      "AI Resume Parser",
-      "JWT Auth",
+      "TypeScript",
+      "REST APIs",
+      "SCSS",
     ],
-    liveUrl: "https://hireonix.com",
-    githubUrl: "https://github.com",
+    liveUrl: "https://careersensora.vercel.app/",
+    // githubUrl: "https://github.com",
     accentColor: "#18181b",
     previewGradient: "linear-gradient(135deg, #111827 0%, #1f2937 100%)",
-  },
-  {
-    id: "culture-os",
-    title: "Culture OS / Vibe OS",
-    subtitle: "Modern Internal Workspace & Team Performance Command Center",
-    category: "enterprise",
-    categoryLabel: "Enterprise Operations",
-    year: "2023",
-    role: "Full Stack Engineer",
-    description:
-      "A centralized web operational dashboard built for remote and hybrid teams. Features real-time activity timelines, collaborative task orchestration, automated sprint standups, and performance intelligence telemetry.",
-    impactMetrics: [
-      { label: "Team Velocity", value: "+30%" },
-      { label: "Realtime Sync", value: "Socket.IO" },
-      { label: "User Adoption", value: "95%" },
-    ],
-    tags: [
-      "Next.js",
-      "TypeScript",
-      "WebSockets",
-      "Prisma ORM",
-      "PostgreSQL",
-      "Framer Motion",
-    ],
-    githubUrl: "https://github.com",
-    accentColor: "#09090b",
-    previewGradient: "linear-gradient(135deg, #18181b 0%, #27272a 100%)",
   },
 ];
 
@@ -351,15 +292,7 @@ export default function Projects() {
                 {/* Narrative Description */}
                 <p className="project-narrative">{project.description}</p>
 
-                {/* Impact Metrics Banner */}
-                <div className="metrics-banner">
-                  {project.impactMetrics.map((metric, i) => (
-                    <div key={i} className="metric-cell">
-                      <span className="metric-val">{metric.value}</span>
-                      <span className="metric-lbl">{metric.label}</span>
-                    </div>
-                  ))}
-                </div>
+
 
                 {/* Visual Interface Mockup Preview */}
                 <div

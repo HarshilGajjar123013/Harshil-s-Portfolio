@@ -36,11 +36,6 @@ export default function Home() {
       icon: <FaLinkedinIn />,
       href: "https://linkedin.com",
     },
-    {
-      name: "Behance",
-      icon: <FaBehance />,
-      href: "https://behance.net",
-    },
   ];
 
   useEffect(() => {
@@ -223,7 +218,7 @@ export default function Home() {
       <div className="portrait-container">
         <div className="portrait-frame" ref={portraitImgRef}>
           <Image
-            src="/assert/img/Harshil2.png"
+            src="/assert/img/Harshil5.png"
             alt="Harshil Gajjar"
             width={1800}
             height={1278}

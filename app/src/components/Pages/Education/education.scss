@@ -71,94 +71,6 @@
     }
   }
 
-  /* ----------------------------------------------------
-     Highlights & Quick Metrics Bar
-  ----------------------------------------------------- */
-  .education-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.25rem;
-    margin-bottom: clamp(3.5rem, 6vh, 5rem);
-    width: 100%;
-
-    .edu-stat-card {
-      background: #fafafa;
-      border: 1px solid #f0f0f2;
-      border-radius: 20px;
-      padding: 1.5rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-
-      &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: inherit;
-        background: radial-gradient(
-          circle at 50% 0%,
-          rgba(24, 24, 27, 0.03) 0%,
-          transparent 75%
-        );
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .stat-icon-bubble {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        background-color: #ffffff;
-        border: 1px solid #e4e4e7;
-        color: #18181b;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.25rem;
-        margin-bottom: 0.9rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
-        transition: all 0.25s ease;
-      }
-
-      .stat-value {
-        font-size: clamp(1.65rem, 2.2vw, 2.2rem);
-        font-weight: 800;
-        color: #18181b;
-        letter-spacing: -0.03em;
-        line-height: 1;
-        margin-bottom: 0.4rem;
-      }
-
-      .stat-label {
-        font-size: 0.825rem;
-        font-weight: 500;
-        color: #71717a;
-        line-height: 1.35;
-      }
-
-      &:hover {
-        transform: translateY(-4px);
-        background-color: #ffffff;
-        border-color: #d4d4d8;
-        box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.08);
-
-        &::before {
-          opacity: 1;
-        }
-
-        .stat-icon-bubble {
-          background-color: #18181b;
-          color: #ffffff;
-          border-color: #18181b;
-          transform: scale(1.08) rotate(-4deg);
-        }
-      }
-    }
-  }
 
   /* ----------------------------------------------------
      Timeline Architecture
@@ -489,11 +401,6 @@
      Responsiveness (Tablets & Mobile)
   ----------------------------------------------------- */
   @media (max-width: 900px) {
-    .education-stats-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-
     .education-timeline {
       padding-left: 2.25rem;
 
@@ -520,11 +427,6 @@
       }
     }
 
-    .education-stats-grid {
-      grid-template-columns: 1fr;
-      gap: 0.75rem;
-      margin-bottom: 2.75rem;
-    }
 
     .education-timeline {
       padding-left: 0;

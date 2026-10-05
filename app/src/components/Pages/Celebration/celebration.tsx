@@ -109,7 +109,7 @@ export default function Celebration() {
   const formCardRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const emailAddress = "harshilgajjar.dev@gmail.com";
+  const emailAddress = "harshilgajjar06@gmail.com";
 
   // Confetti Particle System
   const triggerConfetti = () => {

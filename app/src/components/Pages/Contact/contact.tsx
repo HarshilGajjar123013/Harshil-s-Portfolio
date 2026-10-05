@@ -42,12 +42,6 @@ const socialLinks = [
     href: "https://instagram.com",
     handle: "@harshil.gajjar",
   },
-  {
-    name: "Behance",
-    icon: <FaBehance />,
-    href: "https://behance.net",
-    handle: "harshilgajjar",
-  },
 ];
 
 export default function Contact() {
@@ -65,7 +59,7 @@ export default function Contact() {
   const cardsRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  const emailAddress = "harshilgajjar.dev@gmail.com";
+  const emailAddress = "harshilgajjar06@gmail.com";
 
   const handleCopyEmail = () => {
     if (navigator?.clipboard) {
@@ -235,7 +229,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <span className="meta-label">Location</span>
-                  <div className="meta-value">Gujarat, India (Remote Worldwide)</div>
+                  <div className="meta-value">Ahmedabad, Gujarat, India (Remote Worldwide)</div>
                 </div>
               </div>
 
@@ -298,7 +292,7 @@ export default function Contact() {
                     <input
                       id="contact-name"
                       type="text"
-                      placeholder="e.g. John Doe"
+                      placeholder="e.g. Harshil Gajjar"
                       required
                       value={formData.name}
                       onChange={(e) =>
@@ -318,7 +312,7 @@ export default function Contact() {
                     <input
                       id="contact-email"
                       type="email"
-                      placeholder="john@example.com"
+                      placeholder="name@example.com"
                       required
                       value={formData.email}
                       onChange={(e) =>
@@ -340,7 +334,7 @@ export default function Contact() {
                   <input
                     id="contact-subject"
                     type="text"
-                    placeholder="e.g. Project Inquiry, Full-Time Role, or Collaboration"
+                    placeholder="e.g. Job Opportunity, Freelance Work, Collaboration, or General Inquiry"
                     value={formData.subject}
                     onChange={(e) =>
                       setFormData({ ...formData, subject: e.target.value })

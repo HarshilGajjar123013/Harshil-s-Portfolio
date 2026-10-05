@@ -2,15 +2,12 @@
 
 import React, { useEffect, useRef } from "react";
 import {
-  FiAward,
-  FiBookOpen,
   FiCalendar,
   FiCheckCircle,
   FiCode,
   FiCpu,
   FiLayers,
   FiMapPin,
-  FiTrendingUp,
 } from "react-icons/fi";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -34,25 +31,24 @@ const educationData: EducationItem[] = [
   {
     id: "btech",
     degree: "Bachelor of Technology (B.Tech) in Computer Science & Engineering",
-    institution: "Gujarat Technological University",
-    location: "Gujarat, India",
-    period: "2021 — 2025",
-    badge: "Degree Completed",
-    grade: "First Class with Distinction (CGPA: 8.5/10)",
+    institution: "Karnavati University",
+    location: "Ahmedabad, Gujarat, India",
+    period: "2023 — 2027",
+    badge: "Expected Graduation - 2027",
+    // grade: "CGPA: 8.3/10",
     description:
       "Deep foundational training in core computer science, software architecture, algorithm design, and distributed systems. Specialized in full-stack engineering, AI automation workflows, and scalable database systems.",
     coreSubjects: [
       "Data Structures & Algorithms",
       "Object-Oriented Programming",
       "Database Management Systems (DBMS)",
-      "Operating Systems & Linux",
       "Computer Networks & Cloud",
       "Artificial Intelligence & Machine Learning",
-      "Web Technologies & Microservices",
-      "Software Engineering & Agile",
+      "Full Stack Development",
+      "AI & Automation Engineering",
     ],
     achievements: [
-      "Built comprehensive end-to-end full stack web platforms as capstone projects",
+      "Successfully built comprehensive end-to-end full stack web platforms as capstone projects",
       "Engineered automated AI workflows integrating LLMs, n8n, and custom REST APIs",
       "Active participant in technical symposiums, coding challenges, and hackathons",
     ],
@@ -60,80 +56,30 @@ const educationData: EducationItem[] = [
   },
   {
     id: "specialization",
-    degree: "Advanced Full Stack & AI Engineering Certification",
-    institution: "Industry Specializations & Professional Labs",
-    location: "Online / Professional Training",
-    period: "2023 — 2024",
-    badge: "Specialized Credential",
-    grade: "Excellence Honors",
+    degree: "Diploma in Computer Engineering",
+    institution: "Government Polytechnic",
+    location: "Ahmedabad, Gujarat, India",
+    period: "2020 — 2023",
+    badge: "Diploma",
     description:
       "Rigorous self-driven and accredited industry immersions focusing on Next.js App Router, modern reactive state management, LangChain agent frameworks, n8n workflow automations, and enterprise Cloud architectures.",
     coreSubjects: [
-      "Next.js 15 & React Server Components",
-      "TypeScript & High-Scalability Systems",
-      "LangChain & Autonomous AI Agents",
-      "n8n & Enterprise Automation Pipelines",
-      "PostgreSQL, Prisma & Redis Caching",
-      "RESTful & GraphQL API Architecture",
+        "Web Development",
+        "Programming with C,C++,Python",
+        "Database Management Systems",
     ],
     achievements: [
-      "Architected autonomous webhook & event-driven automation pipelines",
-      "Mastered server-side rendering, edge functions, and performance profiling",
-      "Developed high-converting, accessible UI systems with pixel-perfect precision",
+      "Successfully built comprehensive end-to-end full stack web platforms as capstone projects",
+      "Gained professional level practical exposure and technical skills",
     ],
     icon: <FiCode className="edu-card-icon" />,
   },
-  {
-    id: "hsc",
-    degree: "Higher Secondary Certificate (HSC) — Science Stream",
-    institution: "Gujarat Secondary and Higher Secondary Education Board",
-    location: "Gujarat, India",
-    period: "2019 — 2021",
-    badge: "Academic Foundation",
-    grade: "Distinction with Science & Math Honors",
-    description:
-      "Strong rigorous foundation in advanced Mathematics, Physics, and Computer Studies. Developed critical thinking, algorithmic logic, analytical problem solving, and early passion for software programming.",
-    coreSubjects: [
-      "Advanced Mathematics & Calculus",
-      "Physics & Electronics Principles",
-      "Computer Science & Problem Solving",
-      "Analytical Reasoning & Statistics",
-    ],
-    achievements: [
-      "Excelled with top percentile honors in Mathematics and Computer Studies",
-      "Created early foundational software scripts and algorithmic exercises",
-    ],
-    icon: <FiLayers className="edu-card-icon" />,
-  },
-];
 
-const highlights = [
-  {
-    stat: "4+",
-    label: "Years of Tech Immersion",
-    icon: <FiTrendingUp />,
-  },
-  {
-    stat: "35+",
-    label: "Core CS & AI Modules Mastered",
-    icon: <FiBookOpen />,
-  },
-  {
-    stat: "Top 5%",
-    label: "Capstone Project Excellence",
-    icon: <FiAward />,
-  },
-  {
-    stat: "100%",
-    label: "Passion for Continuous Mastery",
-    icon: <FiCheckCircle />,
-  },
 ];
 
 export default function Education() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -169,32 +115,7 @@ export default function Education() {
         );
       }
 
-      // 2. Metrics & Highlights Stagger
-      if (statsRef.current) {
-        gsap.fromTo(
-          statsRef.current.children,
-          {
-            y: 24,
-            opacity: 0,
-            scale: 0.96,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.75,
-            stagger: 0.08,
-            ease: "back.out(1.2)",
-            scrollTrigger: {
-              trigger: statsRef.current,
-              start: "top 82%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      }
-
-      // 3. Timeline Items Reveal
+      // 2. Timeline Items Reveal
       const cards = gsap.utils.toArray<HTMLElement>(".edu-timeline-card");
       cards.forEach((card) => {
         gsap.fromTo(
@@ -237,17 +158,6 @@ export default function Education() {
           <p className="education-subtitle">
             A fusion of rigorous academic principles in computer science and cutting-edge practical specialization in Full Stack architecture, AI systems, and automated intelligence.
           </p>
-        </div>
-
-        {/* Highlights / Quick Stats Bar */}
-        <div className="education-stats-grid" ref={statsRef}>
-          {highlights.map((item, index) => (
-            <div key={index} className="edu-stat-card">
-              <div className="stat-icon-bubble">{item.icon}</div>
-              <div className="stat-value">{item.stat}</div>
-              <div className="stat-label">{item.label}</div>
-            </div>
-          ))}
         </div>
 
         {/* Vertical Timeline Structure */}

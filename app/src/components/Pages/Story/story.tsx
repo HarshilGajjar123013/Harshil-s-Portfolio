@@ -134,7 +134,7 @@ export default function Story() {
             </div>
             <div className="polaroid-inner">
               <Image
-                src="/assert/img/story2.png"
+                src="/assert/img/story3.png"
                 alt="Harshil Gajjar portrait"
                 width={1254}
                 height={1254}

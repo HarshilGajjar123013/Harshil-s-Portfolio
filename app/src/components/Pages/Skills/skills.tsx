@@ -7,31 +7,33 @@ import {
   FiLayers,
   FiServer,
   FiZap,
-  FiDatabase,
   FiSliders,
   FiShield,
 } from "react-icons/fi";
 import {
   SiReact,
   SiNextdotjs,
-  SiTypescript,
   SiJavascript,
-  SiNodedotjs,
   SiPython,
-  SiPostgresql,
-  SiMongodb,
-  SiDocker,
   SiTailwindcss,
-  SiRedis,
-  SiFigma,
+  SiBootstrap,
+  SiDjango,
   SiGit,
-  SiPrisma,
+  SiGithub,
+  SiHtml5,
+  SiN8N,
+  SiGoogleappsscript,
+  SiCursor,
+  SiClaudecode,
+  SiDeepmind,
 } from "react-icons/si";
+import { FaCss3Alt } from "react-icons/fa6";
+import { VscVscode } from "react-icons/vsc";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./skills.scss";
 
-type SkillCategory = "all" | "frontend" | "backend" | "ai" | "devops";
+type SkillCategory = "all" | "languages" | "frontend" | "backend" | "tools" | "ai";
 
 interface SkillItem {
   name: string;
@@ -42,7 +44,7 @@ interface SkillItem {
 }
 
 interface SkillDomain {
-  id: "frontend" | "backend" | "ai" | "devops";
+  id: "languages" | "frontend" | "backend" | "tools" | "ai";
   title: string;
   tagline: string;
   icon: React.ReactNode;
@@ -52,218 +54,202 @@ interface SkillDomain {
 
 const skillDomains: SkillDomain[] = [
   {
-    id: "frontend",
-    title: "Frontend & Interactive Engineering",
-    tagline: "Pixel-Perfect, High-Performance User Interfaces",
-    icon: <FiLayers />,
+    id: "languages",
+    title: "Programming Languages",
+    tagline: "Core Logic, Scripting & Algorithmic Foundations",
+    icon: <FiCode />,
     summary:
-      "Crafting responsive, accessible, and cinematic web applications with modern React ecosystems, Server Components, and physics-driven micro-interactions.",
+      "Core programming languages used for developing scalable web applications, algorithm logic, and automated backend scripts.",
     skills: [
       {
-        name: "Next.js 15 (App Router, SSR, Server Actions)",
+        name: "JavaScript",
         level: 95,
-        badge: "Expert",
-        experience: "3+ Years",
-        icon: <SiNextdotjs />,
-      },
-      {
-        name: "React 19 / 18 (Hooks, Suspense, State)",
-        level: 96,
-        badge: "Expert",
-        experience: "4+ Years",
-        icon: <SiReact />,
-      },
-      {
-        name: "TypeScript (Strict Typing & Generics)",
-        level: 92,
         badge: "Advanced",
         experience: "3+ Years",
-        icon: <SiTypescript />,
-      },
-      {
-        name: "JavaScript (ESNext, Async/Await, V8)",
-        level: 95,
-        badge: "Expert",
-        experience: "4+ Years",
         icon: <SiJavascript />,
       },
       {
-        name: "TailwindCSS & SCSS Modules",
+        name: "Python",
+        level: 92,
+        badge: "Advanced",
+        experience: "3+ Years",
+        icon: <SiPython />,
+      },
+    ],
+  },
+  {
+    id: "frontend",
+    title: "Frontend Development",
+    tagline: "Modern, Responsive & Component-Driven UI",
+    icon: <FiLayers />,
+    summary:
+      "Crafting dynamic, accessible, and high-performance user interfaces with modern React frameworks and flexible CSS utility systems.",
+    skills: [
+      {
+        name: "React.js",
         level: 94,
+        badge: "Advanced",
+        experience: "3+ Years",
+        icon: <SiReact />,
+      },
+      {
+        name: "Next.js",
+        level: 92,
+        badge: "Advanced",
+        experience: "2+ Years",
+        icon: <SiNextdotjs />,
+      },
+      {
+        name: "HTML5",
+        level: 98,
         badge: "Expert",
         experience: "4+ Years",
+        icon: <SiHtml5 />,
+      },
+      {
+        name: "CSS3",
+        level: 95,
+        badge: "Expert",
+        experience: "4+ Years",
+        icon: <FaCss3Alt />,
+      },
+      {
+        name: "Tailwind CSS",
+        level: 94,
+        badge: "Advanced",
+        experience: "3+ Years",
         icon: <SiTailwindcss />,
       },
       {
-        name: "GSAP & ScrollTrigger / Micro-Animations",
+        name: "Bootstrap",
         level: 90,
-        badge: "Advanced",
-        experience: "2+ Years",
-        icon: <FiZap />,
+        badge: "Proficient",
+        experience: "3+ Years",
+        icon: <SiBootstrap />,
       },
     ],
   },
   {
     id: "backend",
-    title: "Backend & Distributed Systems",
-    tagline: "Scalable APIs, Realtime Sockets & Robust Data Layers",
+    title: "Backend Development",
+    tagline: "Scalable APIs & Robust Business Logic",
     icon: <FiServer />,
     summary:
-      "Designing fault-tolerant REST and GraphQL microservices, real-time event streaming systems, and high-throughput transactional database architectures.",
+      "Architecting robust server-side applications, relational database models, and RESTful API microservices.",
     skills: [
       {
-        name: "Node.js & Express.js (High-Concurrency APIs)",
+        name: "Django",
+        level: 90,
+        badge: "Advanced",
+        experience: "2+ Years",
+        icon: <SiDjango />,
+      },
+    ],
+  },
+  {
+    id: "tools",
+    title: "Development Tools",
+    tagline: "Version Control, IDE & Developer Productivity",
+    icon: <FiSliders />,
+    summary:
+      "Proficient with industry-standard development environments, collaborative Git workflows, and productivity toolchains.",
+    skills: [
+      {
+        name: "Git",
+        level: 93,
+        badge: "Advanced",
+        experience: "3+ Years",
+        icon: <SiGit />,
+      },
+      {
+        name: "GitHub",
         level: 92,
         badge: "Advanced",
         experience: "3+ Years",
-        icon: <SiNodedotjs />,
+        icon: <SiGithub />,
       },
       {
-        name: "Python (FastAPI, Data Pipelines & Scripting)",
-        level: 88,
-        badge: "Proficient",
-        experience: "3+ Years",
-        icon: <SiPython />,
+        name: "VS Code",
+        level: 96,
+        badge: "Expert",
+        experience: "4+ Years",
+        icon: <VscVscode />,
       },
       {
-        name: "PostgreSQL & Prisma ORM",
-        level: 90,
-        badge: "Advanced",
-        experience: "3+ Years",
-        icon: <SiPostgresql />,
-      },
-      {
-        name: "MongoDB & Mongoose (NoSQL Data Models)",
-        level: 89,
-        badge: "Advanced",
-        experience: "3+ Years",
-        icon: <SiMongodb />,
-      },
-      {
-        name: "Redis (In-Memory Caching & Session Stores)",
-        level: 85,
-        badge: "Proficient",
+        name: "Cursor",
+        level: 95,
+        badge: "Expert",
         experience: "2+ Years",
-        icon: <SiRedis />,
+        icon: <SiCursor />,
       },
       {
-        name: "Prisma & Modern Data Layer ORMs",
-        level: 91,
-        badge: "Advanced",
+        name: "Claude Code",
+        level: 94,
+        badge: "Expert",
         experience: "2+ Years",
-        icon: <SiPrisma />,
+        icon: <SiClaudecode />,
+      },
+      {
+        name: "Antigravity",
+        level: 95,
+        badge: "Expert",
+        experience: "2+ Years",
+        icon: <SiDeepmind />,
       },
     ],
   },
   {
     id: "ai",
-    title: "AI Engineering & Autonomous Agents",
-    tagline: "LLM Workflows, Semantic Search & Intelligent Agents",
+    title: "AI & Automation",
+    tagline: "Intelligent Workflows & Automated Scripting",
     icon: <FiCpu />,
     summary:
-      "Leveraging generative AI models, vector embeddings, RAG architectures, and autonomous agent loops to automate complex business logic and conversational systems.",
+      "Harnessing next-generation AI tools, workflow automation engines, and custom cloud scripts to build smart, efficient processes.",
     skills: [
       {
-        name: "OpenAI & Anthropic APIs (Function Calling & Reasoning)",
+        name: "AI Tools (n8n, AppScript)",
         level: 94,
         badge: "Expert",
         experience: "2+ Years",
         icon: <FiCpu />,
       },
       {
-        name: "LangChain & LlamaIndex Agent Frameworks",
+        name: "n8n",
+        level: 92,
+        badge: "Advanced",
+        experience: "2+ Years",
+        icon: <SiN8N />,
+      },
+      {
+        name: "AppScript",
         level: 90,
         badge: "Advanced",
         experience: "2+ Years",
-        icon: <FiCpu />,
-      },
-      {
-        name: "Semantic Vector Search & Embeddings",
-        level: 88,
-        badge: "Advanced",
-        experience: "2+ Years",
-        icon: <FiDatabase />,
-      },
-      {
-        name: "Autonomous Multi-Agent Task Orchestration",
-        level: 89,
-        badge: "Advanced",
-        experience: "2+ Years",
-        icon: <FiSliders />,
-      },
-      {
-        name: "Advanced Prompt Engineering & System Tuning",
-        level: 95,
-        badge: "Expert",
-        experience: "2+ Years",
-        icon: <FiZap />,
-      },
-    ],
-  },
-  {
-    id: "devops",
-    title: "Automation, DevOps & Cloud Systems",
-    tagline: "Workflow Pipelines, CI/CD & Resilient Cloud Deployments",
-    icon: <FiCode />,
-    summary:
-      "Streamlining operational overhead through n8n enterprise workflow automation, containerization with Docker, and automated CI/CD deployment pipelines.",
-    skills: [
-      {
-        name: "n8n Enterprise Automation Pipelines",
-        level: 95,
-        badge: "Expert",
-        experience: "2+ Years",
-        icon: <FiZap />,
-      },
-      {
-        name: "Docker Containerization & Environments",
-        level: 86,
-        badge: "Proficient",
-        experience: "2+ Years",
-        icon: <SiDocker />,
-      },
-      {
-        name: "Git & GitHub Actions (Automated CI/CD)",
-        level: 91,
-        badge: "Advanced",
-        experience: "4+ Years",
-        icon: <SiGit />,
-      },
-      {
-        name: "Vercel, AWS & Cloud Hosting Infrastructure",
-        level: 90,
-        badge: "Advanced",
-        experience: "3+ Years",
-        icon: <FiServer />,
-      },
-      {
-        name: "Figma UI/UX Systems & Prototyping",
-        level: 90,
-        badge: "Advanced",
-        experience: "3+ Years",
-        icon: <SiFigma />,
+        icon: <SiGoogleappsscript />,
       },
     ],
   },
 ];
 
 const marqueeTech = [
-  "NEXT.JS 15",
-  "REACT 19",
-  "TYPESCRIPT",
-  "N8N AUTOMATION",
+  "JAVASCRIPT",
   "PYTHON",
-  "LANGCHAIN",
-  "OPENAI API",
-  "POSTGRESQL",
-  "NODE.JS",
-  "DOCKER",
-  "TAILWINDCSS",
-  "REDIS",
-  "GSAP",
-  "PRISMA ORM",
-  "MONGODB",
-  "FIGMA",
+  "REACT.JS",
+  "NEXT.JS",
+  "HTML5",
+  "CSS3",
+  "TAILWIND CSS",
+  "BOOTSTRAP",
+  "DJANGO",
+  "GIT",
+  "GITHUB",
+  "VS CODE",
+  "CURSOR",
+  "CLAUDE CODE",
+  "ANTIGRAVITY",
+  "AI TOOLS",
+  "N8N",
+  "APPSCRIPT",
 ];
 
 const engineeringPillars = [
@@ -271,19 +257,19 @@ const engineeringPillars = [
     icon: <FiZap />,
     title: "High-Performance Execution",
     description:
-      "Sub-150ms server responses, 98+ Core Web Vitals, server-side caching, and zero-layout-shift UI engineering.",
+      "Clean semantic markup, optimized client-side rendering, fast load speeds, and zero-layout-shift UI engineering.",
   },
   {
     icon: <FiCpu />,
-    title: "Autonomous Intelligence",
+    title: "Automated Intelligence",
     description:
-      "Self-executing AI workflows, custom tool-augmented agent loops, and robust webhook automation pipelines.",
+      "Streamlined workflow automation pipelines with n8n, Google Apps Script, and intelligent AI tool integrations.",
   },
   {
     icon: <FiShield />,
     title: "Production-Grade Reliability",
     description:
-      "Strict static typing, comprehensive error boundaries, automated testing, and scalable microservice boundaries.",
+      "Reliable backend architecture with Django, systematic Git version control, and clean component-driven design.",
   },
 ];
 
@@ -295,10 +281,58 @@ export default function Skills() {
   const domainsContainerRef = useRef<HTMLDivElement>(null);
   const pillarsRef = useRef<HTMLDivElement>(null);
 
+  const col1Domains = skillDomains.filter((d) =>
+    ["frontend", "languages", "backend"].includes(d.id)
+  );
+  const col2Domains = skillDomains.filter((d) =>
+    ["tools", "ai"].includes(d.id)
+  );
+
   const filteredDomains =
     activeTab === "all"
       ? skillDomains
       : skillDomains.filter((d) => d.id === activeTab);
+
+  const renderDomainCard = (domain: SkillDomain) => (
+    <article key={domain.id} className="domain-card">
+      {/* Domain Header */}
+      <header className="domain-header">
+        <div className="domain-icon-box">{domain.icon}</div>
+        <div className="domain-title-group">
+          <h3 className="domain-title">{domain.title}</h3>
+          <span className="domain-tagline">{domain.tagline}</span>
+        </div>
+      </header>
+
+      <p className="domain-summary">{domain.summary}</p>
+
+      {/* Skills List with Progress Meters */}
+      <div className="skills-list">
+        {domain.skills.map((skill, index) => (
+          <div key={index} className="skill-row">
+            <div className="skill-meta">
+              <div className="skill-name-col">
+                <span className="skill-icon">{skill.icon}</span>
+                <span className="skill-name">{skill.name}</span>
+              </div>
+              <div className="skill-tags">
+                <span className="skill-percent">{skill.level}%</span>
+              </div>
+            </div>
+
+            {/* Animated Progress Meter */}
+            <div className="skill-meter-track" aria-hidden="true">
+              <div
+                className="meter-fill"
+                data-level={skill.level}
+                style={{ width: `${skill.level}%` }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </article>
+  );
 
   useEffect(() => {
     const prefersReducedMotion =
@@ -448,6 +482,14 @@ export default function Skills() {
           </button>
           <button
             type="button"
+            onClick={() => setActiveTab("languages")}
+            className={`tab-btn ${activeTab === "languages" ? "active" : ""}`}
+          >
+            <FiCode className="tab-icon" />
+            <span>Languages</span>
+          </button>
+          <button
+            type="button"
             onClick={() => setActiveTab("frontend")}
             className={`tab-btn ${activeTab === "frontend" ? "active" : ""}`}
           >
@@ -464,66 +506,39 @@ export default function Skills() {
           </button>
           <button
             type="button"
+            onClick={() => setActiveTab("tools")}
+            className={`tab-btn ${activeTab === "tools" ? "active" : ""}`}
+          >
+            <FiSliders className="tab-icon" />
+            <span>Tools</span>
+          </button>
+          <button
+            type="button"
             onClick={() => setActiveTab("ai")}
             className={`tab-btn ${activeTab === "ai" ? "active" : ""}`}
           >
             <FiCpu className="tab-icon" />
-            <span>AI &amp; Automation</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("devops")}
-            className={`tab-btn ${activeTab === "devops" ? "active" : ""}`}
-          >
-            <FiCode className="tab-icon" />
-            <span>DevOps &amp; Tools</span>
+            <span>AI</span>
           </button>
         </nav>
 
         {/* Domains & Skill Matrix Grid */}
-        <div className="skills-domains-grid" ref={domainsContainerRef}>
-          {filteredDomains.map((domain) => (
-            <article key={domain.id} className="domain-card">
-              {/* Domain Header */}
-              <header className="domain-header">
-                <div className="domain-icon-box">{domain.icon}</div>
-                <div className="domain-title-group">
-                  <h3 className="domain-title">{domain.title}</h3>
-                  <span className="domain-tagline">{domain.tagline}</span>
-                </div>
-              </header>
-
-              <p className="domain-summary">{domain.summary}</p>
-
-              {/* Skills List with Progress Meters */}
-              <div className="skills-list">
-                {domain.skills.map((skill, index) => (
-                  <div key={index} className="skill-row">
-                    <div className="skill-meta">
-                      <div className="skill-name-col">
-                        <span className="skill-icon">{skill.icon}</span>
-                        <span className="skill-name">{skill.name}</span>
-                      </div>
-                      <div className="skill-tags">
-                        <span className="skill-exp">{skill.experience}</span>
-                        <span className="skill-pill">{skill.badge}</span>
-                        <span className="skill-percent">{skill.level}%</span>
-                      </div>
-                    </div>
-
-                    {/* Animated Progress Meter */}
-                    <div className="skill-meter-track" aria-hidden="true">
-                      <div
-                        className="meter-fill"
-                        data-level={skill.level}
-                        style={{ width: `${skill.level}%` }}
-                      />
-                    </div>
-                  </div>
-                ))}
+        <div
+          className={`skills-domains-grid ${activeTab !== "all" ? "single-view" : ""}`}
+          ref={domainsContainerRef}
+        >
+          {activeTab === "all" ? (
+            <>
+              <div className="skills-column">
+                {col1Domains.map(renderDomainCard)}
               </div>
-            </article>
-          ))}
+              <div className="skills-column">
+                {col2Domains.map(renderDomainCard)}
+              </div>
+            </>
+          ) : (
+            filteredDomains.map(renderDomainCard)
+          )}
         </div>
 
         {/* Architectural Pillars Showcase */}
