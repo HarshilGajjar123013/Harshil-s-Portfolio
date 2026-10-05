@@ -43,3 +43,5 @@ next-env.d.ts
 # ide & scratch
 .vscode/
 scratch/
+
+.vercel

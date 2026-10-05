@@ -543,8 +543,11 @@ export default function Preloader() {
   // Audio Playback Handling with Browser Autoplay Policy
   const startAudio = () => {
     if (!audioRef.current) return;
-    audioRef.current.volume = 0.55;
-    const playPromise = audioRef.current.play();
+    const audio = audioRef.current;
+    audio.volume = 0.55;
+    audio.muted = false;
+
+    const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise
         .then(() => {
@@ -552,44 +555,89 @@ export default function Preloader() {
           setHasInteracted(true);
         })
         .catch(() => {
-          // If browser blocks immediate playback prior to interaction,
-          // keep isPlayingAudio true so the UI reflects song active intent,
-          // and audio begins on the user's first gesture.
+          // If browser policy blocked unmuted cold play, start muted so stream buffers,
+          // then instantly unmute on first gesture
+          audio.muted = true;
+          audio.play().then(() => {
+            setIsPlayingAudio(true);
+          }).catch(() => {});
         });
+    }
+  };
+
+  const unlockAudio = () => {
+    if (!audioRef.current) return;
+    const audio = audioRef.current;
+    if (audio.muted || audio.paused) {
+      audio.muted = false;
+      audio.volume = 0.55;
+      audio.play().then(() => {
+        setIsPlayingAudio(true);
+        setHasInteracted(true);
+      }).catch(() => {});
     }
   };
 
   const toggleAudio = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!audioRef.current) return;
+    const audio = audioRef.current;
 
-    if (isPlayingAudio && !audioRef.current.paused) {
-      audioRef.current.pause();
+    if (isPlayingAudio && !audio.paused && !audio.muted) {
+      audio.pause();
       setIsPlayingAudio(false);
     } else {
-      setIsPlayingAudio(true);
-      startAudio();
+      audio.muted = false;
+      audio.volume = 0.55;
+      audio.play().then(() => {
+        setIsPlayingAudio(true);
+      }).catch(() => {});
     }
   };
 
-  // Attempt initial autoplay + listen for any user interaction to unlock sound
+  // Attempt initial autoplay + listen for any user interaction to immediately unlock sound
   useEffect(() => {
     startAudio();
 
-    const handleUserInteraction = () => {
-      if (audioRef.current && audioRef.current.paused) {
-        startAudio();
-      }
+    // Unlock on any user gesture across window
+    const userEvents = [
+      "pointerdown",
+      "touchstart",
+      "touchend",
+      "click",
+      "keydown",
+      "wheel",
+      "scroll",
+      "mousemove",
+    ];
+
+    const handleUserGesture = () => {
+      unlockAudio();
     };
 
-    const userEvents = ["pointerdown", "touchstart", "click", "keydown", "wheel", "scroll"];
     userEvents.forEach((evt) =>
-      window.addEventListener(evt, handleUserInteraction, { passive: true })
+      window.addEventListener(evt, handleUserGesture, { passive: true })
     );
+
+    // AudioContext unlock attempt
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (AudioCtx) {
+        const ctx = new AudioCtx();
+        if (ctx.state === "suspended") {
+          const resumeAudioCtx = () => {
+            ctx.resume().then(() => unlockAudio()).catch(() => {});
+          };
+          window.addEventListener("pointerdown", resumeAudioCtx, { once: true, passive: true });
+          window.addEventListener("touchstart", resumeAudioCtx, { once: true, passive: true });
+          window.addEventListener("click", resumeAudioCtx, { once: true, passive: true });
+        }
+      }
+    } catch {}
 
     return () => {
       userEvents.forEach((evt) =>
-        window.removeEventListener(evt, handleUserInteraction)
+        window.removeEventListener(evt, handleUserGesture)
       );
     };
   }, []);
@@ -678,9 +726,10 @@ export default function Preloader() {
     <div
       className={`preloader-overlay ${isCompleted ? "is-exiting" : ""}`}
       ref={containerRef}
-      onClick={startAudio}
-      onPointerDown={startAudio}
-      onTouchStart={startAudio}
+      onClick={unlockAudio}
+      onPointerDown={unlockAudio}
+      onTouchStart={unlockAudio}
+      onMouseMove={unlockAudio}
       aria-hidden="true"
     >
       {/* Background Audio Song Track */}
@@ -691,6 +740,9 @@ export default function Preloader() {
         autoPlay
         playsInline
         loop
+        onCanPlay={() => startAudio()}
+        onCanPlayThrough={() => startAudio()}
+        onLoadedData={() => startAudio()}
       />
 
       {/* Cyber HUD Corner Viewport Brackets */}
