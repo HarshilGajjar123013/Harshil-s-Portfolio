@@ -39,8 +39,8 @@ const socialLinks = [
   {
     name: "Instagram",
     icon: <FaInstagram />,
-    href: "https://instagram.com",
-    handle: "@harshil.gajjar",
+    href: "https://www.instagram.com/harshil_gajjar_31?stkn=MXhvbnNjdjRrMXdiNQ%3D%3D",
+    handle: "@harshil_gajjar_31",
   },
 ];
 

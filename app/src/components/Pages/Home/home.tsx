@@ -29,7 +29,7 @@ export default function Home() {
     {
       name: "Instagram",
       icon: <FaInstagram />,
-      href: "https://instagram.com",
+      href: "https://www.instagram.com/harshil_gajjar_31?stkn=MXhvbnNjdjRrMXdiNQ%3D%3D",
     },
     {
       name: "LinkedIn",
