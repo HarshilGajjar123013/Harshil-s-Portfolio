@@ -4,18 +4,19 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   FiActivity,
+  FiAlertCircle,
   FiArrowUpRight,
   FiCheckCircle,
   FiClock,
   FiCopy,
-  FiCpu,
+  FiDollarSign,
   FiLayers,
+  FiLoader,
   FiLock,
   FiMail,
   FiMessageSquare,
   FiPhone,
   FiSend,
-  FiShield,
   FiUploadCloud,
   FiUser,
   FiZap,
@@ -26,28 +27,17 @@ import "./celebration.scss";
 const projectDomains = [
   {
     id: "fullstack",
-    title: "Full Stack Web Platform",
+    title: "Full Stack Web and APP Platform",
     desc: "Next.js 15, React, TypeScript, high-concurrency APIs, and scalable DB architecture.",
     icon: <FiLayers />,
   },
   {
-    id: "ai-agents",
-    title: "AI Agents & LLM Systems",
-    desc: "Autonomous agent orchestration, LangChain, semantic vector search, and custom tools.",
-    icon: <FiCpu />,
-  },
-  {
     id: "automation",
-    title: "n8n Workflow Automation",
+    title: " Automation",
     desc: "Enterprise webhook integrations, lead scoring, automated notification pipelines.",
     icon: <FiZap />,
   },
-  {
-    id: "enterprise",
-    title: "Enterprise Architecture & Audit",
-    desc: "System scalability review, Core Web Vitals optimization, database refactoring.",
-    icon: <FiShield />,
-  },
+ 
 ];
 
 const timelineOptions = [
@@ -90,18 +80,22 @@ const trustPerks = [
 export default function Celebration() {
   const [selectedDomain, setSelectedDomain] = useState("fullstack");
   const [selectedTimeline, setSelectedTimeline] = useState(timelineOptions[0]);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     company: "",
-    budget: "$3,000 — $7,000",
+    budget: "",
     timeline: timelineOptions[0],
     projectStatus: projectStatusOptions[0],
     message: "",
+    additionalNotes: "",
     fileName: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -231,12 +225,59 @@ export default function Celebration() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email) return;
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setErrorMessage("Please complete all required fields (Full Name, Email, and Project Vision).");
+      return;
+    }
 
-    triggerConfetti();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    const activeDomainObj = projectDomains.find((d) => d.id === selectedDomain);
+
+    try {
+      const payload = new FormData();
+      payload.append("name", formData.name.trim());
+      payload.append("email", formData.email.trim());
+      if (formData.phone) payload.append("phone", formData.phone.trim());
+      if (formData.company) payload.append("company", formData.company.trim());
+      payload.append("domain", selectedDomain);
+      payload.append("domainTitle", activeDomainObj?.title || selectedDomain);
+      payload.append("message", formData.message.trim());
+      if (formData.budget) payload.append("budget", formData.budget.trim());
+      payload.append("timeline", selectedTimeline || formData.timeline);
+      payload.append("projectStatus", formData.projectStatus);
+      if (formData.additionalNotes) {
+        payload.append("additionalNotes", formData.additionalNotes.trim());
+      }
+      if (selectedFile) {
+        payload.append("file", selectedFile);
+      }
+
+      const response = await fetch("/api/collaborate", {
+        method: "POST",
+        body: payload,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit collaboration request.");
+      }
+
+      triggerConfetti();
+      setIsSubmitted(true);
+    } catch (err: unknown) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : "An unexpected error occurred while transmitting your blueprint.";
+      setErrorMessage(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -288,7 +329,7 @@ export default function Celebration() {
                       <input
                         id="user-name"
                         type="text"
-                        placeholder="e.g. Maya Patel"
+                        placeholder="e.g. Harshil Gajjar"
                         required
                         value={formData.name}
                         onChange={(e) =>
@@ -308,7 +349,7 @@ export default function Celebration() {
                       <input
                         id="user-email"
                         type="email"
-                        placeholder="maya@company.com"
+                        placeholder="name@example.com"
                         required
                         value={formData.email}
                         onChange={(e) =>
@@ -328,7 +369,7 @@ export default function Celebration() {
                       <input
                         id="user-phone"
                         type="tel"
-                        placeholder="+1 (555) 000-0000"
+                        placeholder="+91 00000 00000"
                         value={formData.phone}
                         onChange={(e) =>
                           setFormData({ ...formData, phone: e.target.value })
@@ -427,14 +468,14 @@ export default function Celebration() {
                 </div>
               </div>
 
-              {/* Step 4: Budget & Timeline (2-Column Desktop/Tablet, 1-Column Mobile) */}
+              {/* Step 4: Budget Inquiry & Timeline (2-Column Desktop/Tablet, 1-Column Mobile) */}
               <div className="form-section">
                 <div className="section-label-group">
                   <span className="step-counter">04</span>
                   <div className="label-text">
                     <h2 className="step-title">Scope &amp; Timeline</h2>
                     <p className="step-subtitle">
-                      Define the target delivery window and budget scope.
+                      Define the target delivery window and budget inquiry notes.
                     </p>
                   </div>
                 </div>
@@ -442,22 +483,20 @@ export default function Celebration() {
                 <div className="form-two-col-grid">
                   <div className="input-field">
                     <label htmlFor="user-budget" className="field-lbl">
-                      Budget / Investment Scope
+                      Budget Inquiry &amp; Notes
                     </label>
                     <div className="input-wrap">
-                      <select
+                      <FiDollarSign className="f-icon" />
+                      <input
                         id="user-budget"
+                        type="text"
+                        placeholder="e.g. Flexible, $3,000 — $5,000, or Requesting Quote"
                         value={formData.budget}
                         onChange={(e) =>
                           setFormData({ ...formData, budget: e.target.value })
                         }
-                        className="f-select"
-                      >
-                        <option value="$1,000 — $3,000">$1,000 — $3,000</option>
-                        <option value="$3,000 — $7,000">$3,000 — $7,000</option>
-                        <option value="$7,000 — $15,000+">$7,000 — $15,000+</option>
-                        <option value="Enterprise Scope">Enterprise Scope / Custom</option>
-                      </select>
+                        className="f-input"
+                      />
                     </div>
                   </div>
 
@@ -543,6 +582,14 @@ export default function Celebration() {
                         onChange={(e) => {
                           const file = e.target.files?.[0];
                           if (file) {
+                            if (file.size > 15 * 1024 * 1024) {
+                              setErrorMessage(
+                                "The selected file is too large. Please select a file under 15MB."
+                              );
+                              return;
+                            }
+                            setErrorMessage(null);
+                            setSelectedFile(file);
                             setFormData({ ...formData, fileName: file.name });
                           }
                         }}
@@ -551,14 +598,47 @@ export default function Celebration() {
                     </div>
                   </div>
                 </div>
+
+                {/* Additional Notes Field */}
+                <div className="textarea-field" style={{ marginTop: "0.25rem" }}>
+                  <label htmlFor="user-additional-notes" className="field-lbl">
+                    Additional Notes (Optional)
+                  </label>
+                  <div className="input-wrap textarea-wrap">
+                    <FiMessageSquare className="f-icon textarea-icon" />
+                    <textarea
+                      id="user-additional-notes"
+                      rows={3}
+                      placeholder="Add any additional notes, specific preferences, questions, or details..."
+                      value={formData.additionalNotes}
+                      onChange={(e) =>
+                        setFormData({ ...formData, additionalNotes: e.target.value })
+                      }
+                      className="f-textarea"
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Action Submit Button & Celebrate Button */}
               <div className="form-action-bar">
-                <button type="submit" className="submit-launch-btn">
-                  <span className="submit-label-full">Launch Collaboration &amp; Transmit Blueprint</span>
-                  <span className="submit-label-short">Launch Collaboration</span>
-                  <FiSend className="btn-icon" />
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`submit-launch-btn ${isSubmitting ? "loading" : ""}`}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <FiLoader className="btn-icon spin-loader" />
+                      <span>Transmitting Blueprint...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="submit-label-full">Launch Collaboration &amp; Transmit Blueprint</span>
+                      <span className="submit-label-short">Launch Collaboration</span>
+                      <FiSend className="btn-icon" />
+                    </>
+                  )}
                 </button>
 
                 <button
@@ -571,6 +651,13 @@ export default function Celebration() {
                   <span className="celebrate-sparkle">✨</span>
                 </button>
               </div>
+
+              {errorMessage && (
+                <div className="form-error-banner" role="alert">
+                  <FiAlertCircle className="error-icon" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
             </form>
           ) : (
             <div className="celebration-success-card">

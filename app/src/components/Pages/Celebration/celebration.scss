@@ -822,6 +822,20 @@
         &:active {
           transform: scale(0.99);
         }
+
+        &.loading {
+          opacity: 0.85;
+          cursor: wait;
+        }
+
+        &:disabled {
+          cursor: not-allowed;
+          opacity: 0.75;
+        }
+
+        .spin-loader {
+          animation: spinLoader 1s linear infinite;
+        }
       }
 
       .celebrate-burst-btn {
@@ -870,6 +884,26 @@
         &:active {
           transform: scale(0.99);
         }
+      }
+    }
+
+    .form-error-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-top: 0.75rem;
+      padding: 0.85rem 1.15rem;
+      border-radius: 12px;
+      background-color: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
+      font-size: 0.875rem;
+      font-weight: 500;
+      animation: fadeInError 0.3s ease;
+
+      .error-icon {
+        font-size: 1.2rem;
+        flex-shrink: 0;
       }
     }
 
@@ -1445,5 +1479,25 @@
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes spinLoader {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInError {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

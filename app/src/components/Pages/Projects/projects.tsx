@@ -38,35 +38,6 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    id: "salahakar",
-    title: "Salahakar AI",
-    subtitle: "Enterprise AI Legal Intelligence & Multilingual Document Platform",
-    category: "ai",
-    categoryLabel: "AI & Legal Tech",
-    year: "2025-2026",
-    role: "Lead Full Stack & AI Architect",
-    description:
-      "Engineered a high-performance legal advisory web ecosystem powered by AI embeddings and semantic search. Features real-time legal judgment retrieval, multilingual legal act mapping, an automated contract editor, and an intelligent legal advisory bot.",
-    impactMetrics: [
-      { label: "Search Latency", value: "< 180ms" },
-      { label: "Documents Indexed", value: "250K+" },
-      { label: "Workflow Efficiency", value: "85% Boost" },
-    ],
-    tags: [
-      "React.JS",
-      "SCSS",
-      "Python",
-      "AI",
-      "PostrageSQL",
-      "API"
-    ],
-    liveUrl: "https://salhakar.com/",
-    // githubUrl: "https://github.com",
-    accentColor: "#18181b",
-    previewGradient: "linear-gradient(135deg, #18181b 0%, #27272a 100%)",
-    featured: true,
-  },
-  {
     id: "designs-of-dreams",
     title: "Designs of Dreams (DoD)",
     subtitle: "High-End Luxury The Heritage Collections to create dignified, sustainable livelihoods for local Indian artisans, especially rural women, while bringing the timeless grace of handcrafted sarees, dupattas, and bespoke embroidery to modern celebrations.",

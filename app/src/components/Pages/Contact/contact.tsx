@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import {
+  FiAlertCircle,
   FiArrowUpRight,
   FiCheck,
   FiClock,
   FiCopy,
+  FiLoader,
   FiMail,
   FiMapPin,
   FiMessageSquare,
@@ -15,9 +17,8 @@ import {
 } from "react-icons/fi";
 import {
   FaGithub,
-  FaLinkedinIn,
   FaInstagram,
-  FaBehance,
+  FaLinkedinIn,
 } from "react-icons/fa";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -51,7 +52,9 @@ export default function Contact() {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -69,19 +72,49 @@ export default function Contact() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
-    setIsSubmitted(true);
-    setTimeout(() => {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setErrorMessage("Please fill out all required fields (Name, Email, and Message).");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit message. Please try again.");
+      }
+
+      setIsSubmitted(true);
       setFormData({
         name: "",
         email: "",
         subject: "",
         message: "",
       });
-      setIsSubmitted(false);
-    }, 4500);
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 5000);
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      setErrorMessage(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -369,10 +402,15 @@ export default function Contact() {
               <div className="form-submit-row">
                 <button
                   type="submit"
-                  disabled={isSubmitted}
-                  className={`btn-send-message ${isSubmitted ? "sent" : ""}`}
+                  disabled={isSubmitting || isSubmitted}
+                  className={`btn-send-message ${isSubmitted ? "sent" : ""} ${isSubmitting ? "loading" : ""}`}
                 >
-                  {isSubmitted ? (
+                  {isSubmitting ? (
+                    <>
+                      <FiLoader className="btn-send-icon spin-loader" />
+                      <span>Sending Message...</span>
+                    </>
+                  ) : isSubmitted ? (
                     <>
                       <FiCheck className="btn-send-icon" />
                       <span>Message Sent Successfully!</span>
@@ -384,6 +422,13 @@ export default function Contact() {
                     </>
                   )}
                 </button>
+
+                {errorMessage && (
+                  <div className="form-error-banner" role="alert">
+                    <FiAlertCircle className="error-icon" />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
               </div>
             </form>
           </div>

@@ -570,6 +570,40 @@
             background-color: #059669;
             box-shadow: 0 6px 18px rgba(5, 150, 105, 0.3);
           }
+
+          &.loading {
+            background-color: #27272a;
+            cursor: wait;
+          }
+
+          &:disabled {
+            cursor: not-allowed;
+            opacity: 0.9;
+          }
+
+          .spin-loader {
+            animation: spinBtnIcon 1s linear infinite;
+          }
+        }
+
+        .form-error-banner {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+          margin-top: 0.85rem;
+          padding: 0.8rem 1rem;
+          border-radius: 12px;
+          background-color: #fef2f2;
+          border: 1px solid #fecaca;
+          color: #dc2626;
+          font-size: 0.875rem;
+          font-weight: 500;
+          animation: fadeInError 0.3s ease;
+
+          .error-icon {
+            font-size: 1.15rem;
+            flex-shrink: 0;
+          }
         }
       }
     }
@@ -677,5 +711,25 @@
   100% {
     transform: scale(2.4);
     opacity: 0;
+  }
+}
+
+@keyframes spinBtnIcon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInError {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
