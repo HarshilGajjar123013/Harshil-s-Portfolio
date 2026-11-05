@@ -49,8 +49,8 @@ export async function POST(request: Request) {
 
     // 2. Save to MongoDB (Portfolio -> contact)
     const client = await clientPromise;
-    const dbName = process.env.MONGODB_DB || "Portfolio";
-    const collectionName = process.env.MONGODB_COLLECTION || "contact";
+    const dbName = (process.env.MONGODB_DB || "Portfolio").trim();
+    const collectionName = (process.env.MONGODB_COLLECTION || "contact").trim();
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
 
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
     let emailError: string | null = null;
 
     try {
-      const recipientEmail = process.env.CONTACT_EMAIL_TO || "harshilgajjar06@gmail.com";
+      const recipientEmail = (process.env.CONTACT_EMAIL_TO || "harshilgajjar06@gmail.com").trim();
       const emailSubject = `[Harshil's Portfolio] New Contact Inquiry: ${sanitizedData.subject} from ${sanitizedData.name}`;
 
       const emailResponse = await resend.emails.send({

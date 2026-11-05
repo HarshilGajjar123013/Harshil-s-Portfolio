@@ -125,9 +125,10 @@ export async function POST(request: Request) {
 
     // 2. Save to MongoDB (Portfolio -> collaborate)
     const client = await clientPromise;
-    const dbName = process.env.MONGODB_DB || "Portfolio";
-    const collectionName =
-      process.env.MONGODB_COLLABORATE_COLLECTION || "collaborate";
+    const dbName = (process.env.MONGODB_DB || "Portfolio").trim();
+    const collectionName = (
+      process.env.MONGODB_COLLABORATE_COLLECTION || "collaborate"
+    ).trim();
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
 
@@ -138,8 +139,9 @@ export async function POST(request: Request) {
     let emailError: string | null = null;
 
     try {
-      const recipientEmail =
-        process.env.CONTACT_EMAIL_TO || "harshilgajjar06@gmail.com";
+      const recipientEmail = (
+        process.env.CONTACT_EMAIL_TO || "harshilgajjar06@gmail.com"
+      ).trim();
       const emailSubject = `[Harshil's Portfolio] New Collaboration Blueprint: ${sanitizedData.name} (${sanitizedData.domainTitle})`;
 
       // Prepare attachment if file buffer is present
