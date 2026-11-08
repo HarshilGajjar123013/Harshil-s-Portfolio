@@ -440,6 +440,10 @@
         display: none;
       }
 
+      .talk-dropdown-wrapper {
+        display: none;
+      }
+
       .mobile-menu-toggle {
         display: flex;
       }
@@ -457,12 +461,6 @@
 
     .navbar-actions {
       gap: 0.45rem;
-
-      .navbar-cta-btn {
-        padding: 0.5rem 0.85rem;
-        font-size: 0.785rem;
-        min-height: 44px;
-      }
     }
   }
 
@@ -496,11 +494,6 @@
     }
 
     .navbar-actions {
-      .navbar-cta-btn {
-        padding: 0.45rem 0.65rem;
-        font-size: 0.725rem;
-      }
-
       .mobile-menu-toggle {
         width: 40px;
         height: 40px;
