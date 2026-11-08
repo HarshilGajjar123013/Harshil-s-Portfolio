@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
   FiArrowUpRight,
@@ -149,7 +150,16 @@ export default function Navbar() {
             className="navbar-brand"
             aria-label="Harshil Gajjar Homepage"
           >
-            <span className="brand-monogram">HG</span>
+            <span className="brand-monogram">
+              <Image
+                src="/assert/img/story.png"
+                alt="Harshil Gajjar"
+                width={36}
+                height={36}
+                priority
+                className="brand-avatar-img"
+              />
+            </span>
             <span className="brand-text">
               <span className="brand-title">Harshil Gajjar</span>
               <span className="brand-sub">Full Stack &amp; AI</span>
@@ -283,7 +293,15 @@ export default function Navbar() {
         <div className="drawer-panel">
           <div className="drawer-header">
             <div className="drawer-brand">
-              <span className="brand-monogram">HG</span>
+              <span className="brand-monogram">
+                <Image
+                  src="/assert/img/story.png"
+                  alt="Harshil Gajjar"
+                  width={34}
+                  height={34}
+                  className="brand-avatar-img"
+                />
+              </span>
               <span className="brand-title">Harshil Gajjar</span>
             </div>
             <button
